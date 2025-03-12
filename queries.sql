@@ -90,59 +90,59 @@ group by batting_team
 order by runs desc
 limit 10;
 
--- Overall Batsman Performance
+-- Overall Batsman Performance example virat kholi
 select 
-				striker,
-				count(distinct (match_id)) as matches, 
-                sum(runs_off_bat) as runs,
-                count(runs_off_bat) as balls_faced,
+	striker,
+	count(distinct (match_id)) as matches, 
+        sum(runs_off_bat) as runs,
+        count(runs_off_bat) as balls_faced,
                 
-                case
-					when count(case 
-						when player_dismissed=striker then 1 end)=0 then null
-					else round(sum(runs_off_bat)/count(case 
-						when player_dismissed=striker then 1 end),3)
-				end as average,
+        case
+		when count(case 
+		when player_dismissed=striker then 1 end)=0 then null
+		else round(sum(runs_off_bat)/count(case 
+							when player_dismissed=striker then 1 end),3)
+							end as average,
                 
-                round((sum(runs_off_bat)/count(runs_off_bat))*100,3) as SR,
+        round((sum(runs_off_bat)/count(runs_off_bat))*100,3) as SR,
                 
-                (select max(total_runs) 
-					from (select match_id, sum(runs_off_bat) as total_runs
-					from deliveries
-					where striker='V Kohli'
-					group by match_id
-					) as score) as HS,
-                    
-                    (select count(record) as 50s from(
-					select
-					case when runs between 0 and 49 then 'no fifty'
-					when runs between 50 and 99 then 'fifty'
-					else 'hundrd'
-					end as record
-					from
-					(select match_id, sum(runs_off_bat) as runs
-					from deliveries
-					where striker='V Kohli'
-					group by match_id
-					order by match_id) as score) as 50s
-					where record='fifty') as 50s,
-                    
-                    (select count(record) as 100s from(
-					select
-					case when runs between 0 and 49 then 'no fifty'
-					when runs between 50 and 99 then 'fifty'
-					else 'hundred'
-					end as record
-					from
-					(select match_id, sum(runs_off_bat) as runs
-					from deliveries
-					where striker='V Kohli'
-					group by match_id
-					order by match_id) as score) as 100s
-					where record='hundred') as 100s,
-                    
-                    count(case 
-						when player_dismissed=striker then 1 end) as dimissed
+        (select max(total_runs) 
+	from (select match_id, sum(runs_off_bat) as total_runs
+	from deliveries
+	where striker='V Kohli'
+	group by match_id
+	) as score) as HS,
+	    
+	(select count(record) as 50s from(
+	select
+	case when runs between 0 and 49 then 'no fifty'
+	when runs between 50 and 99 then 'fifty'
+	else 'hundrd'
+	end as record
+	from
+	(select match_id, sum(runs_off_bat) as runs
+	from deliveries
+	where striker='V Kohli'
+	group by match_id
+	order by match_id) as score) as 50s
+	where record='fifty') as 50s,
+	    
+	(select count(record) as 100s from(
+	select
+	case when runs between 0 and 49 then 'no fifty'
+	when runs between 50 and 99 then 'fifty'
+	else 'hundred'
+	end as record
+	from
+	(select match_id, sum(runs_off_bat) as runs
+	from deliveries
+	where striker='V Kohli'
+	group by match_id
+	order by match_id) as score) as 100s
+	where record='hundred') as 100s,
+	   
+	count(case 
+		when player_dismissed=striker then 1 end) as dimissed
 from deliveries
 where striker = 'V kohli'
 group by striker;
