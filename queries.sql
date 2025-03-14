@@ -151,7 +151,48 @@ group by striker;
 select distinct venue, count(distinct match_id) as matches from deliveries
 group by venue;
 
+-- player of match in india matches
+select player_of_match
+from matches
+where team1='india' or team2='india';
 
+-- player of the match how many times
+select player_of_match as player_name, count(player_of_match) as potm
+from matches
+group by player_of_match
+order by potm desc;
+
+-- most wins teams
+select winner as team, count(winner) as wins
+from matches
+group by winner
+order by wins desc;
+
+-- toss win vs match win
+WITH TW AS(
+SELECT 
+	TOSS_WINNER AS TEAM, COUNT(TOSS_WINNER) AS TOSS_WON
+FROM MATCHES
+GROUP BY TOSS_WINNER),
+MW AS(
+SELECT
+	WINNER AS TEAM, COUNT(WINNER) AS MATCH_WON
+FROM MATCHES
+GROUP BY WINNER)
+SELECT TW.TEAM, TW.TOSS_WON, MW.MATCH_WON
+FROM TW
+	JOIN MW ON TW.TEAM=MW.TEAM;
+    
+-- most wickets in the season
+SELECT BOWLER,COUNT(CASE WHEN PLAYER_DISMISSED<>'' AND NOBALLS='' THEN 1 END) WICKETS
+FROM DELIVERIES
+GROUP BY BOWLER
+ORDER BY WICKETS DESC;
+
+SELECT BOWLER,COUNT(NULLIF(PLAYER_DISMISSED,'')) WICKETS
+FROM DELIVERIES
+GROUP BY BOWLER
+ORDER BY WICKETS DESC;
 
 
 
