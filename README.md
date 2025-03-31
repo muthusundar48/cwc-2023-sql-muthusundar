@@ -13,7 +13,7 @@ This project performs **Exploratory Data Analysis (EDA) on Cricket World Cup 202
 ## 📂 Dataset Details  
 - **Dataset Name:** `deliveries.csv.csv`,`matches.csv`,`points_table.csv`  
 - **Source:** [Kaggle]  
-- **Size:** []  
+- **Size:** [26120*21]  
 - **Description:** Contains match results, player stats, team performance, and venue details  
 
 ## 🔎 Key Insights from SQL Analysis  
