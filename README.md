@@ -1,4 +1,4 @@
-# 🏏 Cricket World Cup 2023 - SQL Analysis [Click here]()
+# 🏏 Cricket World Cup 2023 - SQL Analysis [Click here](https://github.com/muthusundar48/cwc-2023-sql-muthusundar/blob/main/queries.md)
 
 ## 📌 Project Overview  
 This project performs **Exploratory Data Analysis (EDA) on Cricket World Cup 2023** using **SQL**. The dataset contains match statistics, player performances, team scores, and other key metrics. Using SQL queries, we derive insights such as **top-performing teams, leading run-scorers, win-loss records, and key match trends**.  
